@@ -1,0 +1,279 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<meta content="text/css" http-equiv="Content-Style-Type">
+<title>基于WebSocket的 小型 网页聊天室</title>
+</head>
+<body>
+<h1 align="center" class="root">
+<a name="3m562hoojk608mqd6e324h3h2k">基于WebSocket的 小型 网页聊天室</a>
+</h1>
+<div align="center" class="globalOverview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4.jpg"></div>
+<h2 class="topic">
+<a name="59riqt8coqqtckegsdnk12ss3n">功能分析</a>
+</h2>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/%E5%8A%9F%E8%83%BD%E5%88%86%E6%9E%90.jpg"></div>
+<h3 class="topic">
+<a name="4a3tfovfaok7ndjalj187un27j">&nbsp;一对一发送</a>
+</h3>
+<h3 class="topic">
+<a name="00aj0foku3hmk6u2flb84m2fci">&nbsp;一对多广播</a>
+</h3>
+<h2 class="topic">
+<a name="24qoogd99ka0r63t52hbbad64l">WebSocket</a>
+</h2>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/WebSocket.jpg"></div>
+<h3 class="topic">
+<a name="77sna98tkt844brcjdgr1q2s7f">&nbsp;浏览器与服务器 建立一个基于WebSocket协议的连接</a>
+</h3>
+<h3 class="topic">
+<a name="0pjdlf74cau4li6vl3jeb7tkea">&nbsp;WebSocket协议是Http协议的升级</a>
+</h3>
+<h3 class="topic">
+<a name="17dh7ddvclel9v0rd8d3hievt9">&nbsp;本质是一个TCP连接</a>
+</h3>
+<p class="relationships">参见: <a href="#203guokhm09d09lbvjtkvmqish">客户端发起建立连接请求</a>
+</p>
+<h2 class="topic">
+<a name="250taiirpnk9mpus2vfef4rpu6">客户端 JavaScript接口</a>
+</h2>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/%E5%AE%A2%E6%88%B7%E7%AB%AF JavaScript%E6%8E%A5%E5%8F%A3.jpg"></div>
+<h3 class="topic">
+<a name="4dggcfg0583ebmntuu4fot2ssk">&nbsp;WebSocket</a>
+</h3>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/WebSocket 2.jpg"></div>
+<h3 class="topic">
+<a name="276h3pc7udsgnjee2i797qvlmh">&nbsp;&nbsp;构造 new WebSocket（WebServerUrl）</a>
+</h3>
+<h3 class="topic">
+<a name="3bhkd9ni2uvkgb4aci574qnp9b">&nbsp;&nbsp;事件驱动</a>
+</h3>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8.jpg"></div>
+<h3 class="topic">
+<a name="3301o13tdsvvkbd78ffeg6qb9f">&nbsp;&nbsp;&nbsp;onOpen</a>
+</h3>
+<h3 class="topic">
+<a name="0km9ajal98oagf27aq0odcbi2d">&nbsp;&nbsp;&nbsp;onClose</a>
+</h3>
+<h3 class="topic">
+<a name="0vcdsk8eqi0q4scrh59mcjv0j3">&nbsp;&nbsp;&nbsp;onMessage</a>
+</h3>
+<h3 class="topic">
+<a name="330s4djm3nfn1nbn393rk5e4s5">&nbsp;&nbsp;&nbsp;onError</a>
+</h3>
+<h2 class="topic">
+<a name="66q5o55bbs2rtnhdipcrcdfdcg">服务器端</a>
+</h2>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF.jpg"></div>
+<h3 class="topic">
+<a name="1ln1j4qeloto2317d8os5jusac">&nbsp;握手过程：&#13;
+1 、服务器拿到 客户端请求头中的 WebSockt-Key等字符串&#13;
+2、对这些字符串做处理 生成字节数组 然后 MD5加密 得到字符串&#13;
+3、将这个字符串作为安全密钥返回至客户端</a>
+</h3>
+<h3 class="topic">
+<a name="78mejrhurainps31a7qc7k7lqq">&nbsp;java 实现</a>
+</h3>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/java %E5%AE%9E%E7%8E%B0.jpg"></div>
+<h3 class="topic">
+<a name="7a870st50ernm3j64252nbovtu">&nbsp;&nbsp;maven 依赖</a>
+</h3>
+<div class="notesContainer">
+<p> &lt;dependency&gt;</p>
+<p>            &lt;groupId&gt;javax.websocket&lt;/groupId&gt;</p>
+<p>            &lt;artifactId&gt;javax.websocket-api&lt;/artifactId&gt;</p>
+<p>            &lt;version&gt;1.0&lt;/version&gt;</p>
+<p>        &lt;/dependency&gt;</p>
+</div>
+<h3 class="topic">
+<a name="6ostugkinlejvfeissiq1pdhb8">&nbsp;&nbsp;核心类</a>
+</h3>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/%E6%A0%B8%E5%BF%83%E7%B1%BB.jpg"></div>
+<h3 class="topic">
+<a name="78o0fv9dfc7294kpmj8j890isu">&nbsp;&nbsp;&nbsp;javax.websocket.Session</a>
+</h3>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/javax.websocket.Session.jpg"></div>
+<h3 class="topic">
+<a name="1dat49bcunpdblhfrnii7utq0s">&nbsp;&nbsp;&nbsp;&nbsp;如何通过服务器 向客户端  发消息 主要通过这个对象实现</a>
+</h3>
+<h3 class="topic">
+<a name="0o9mn2h83jtk441scblj35u2s0">&nbsp;&nbsp;核心注解</a>
+</h3>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/%E6%A0%B8%E5%BF%83%E6%B3%A8%E8%A7%A3.jpg"></div>
+<h3 class="topic">
+<a name="21jf2qrgts99c86ldgikfrr74j">&nbsp;&nbsp;&nbsp;@ServerEndpoint(value = "/msg") &#13;
+1、声明一个WebSocketServer 地址</a>
+</h3>
+<h3 class="topic">
+<a name="37cq3tu2l6hd99vt7la6rmgk0v">&nbsp;&nbsp;&nbsp;@OnOpen&#13;
+1、声明一个 连接建立时的处理器</a>
+</h3>
+<div class="notesContainer">
+<p>    @OnOpen</p>
+<p>    public void onOpen(Session session) throws IOException {</p>
+<p>        this.session = session;</p>
+<p>        connections.add(this);</p>
+<p>        // refreshConn();</p>
+<p>        Log.log(session.getId());</p>
+<p>    }</p>
+</div>
+<h3 class="topic">
+<a name="5lm7969ugnb0jfoivu4gr6g9ae">&nbsp;&nbsp;&nbsp;@OnClose</a>
+</h3>
+<h3 class="topic">
+<a name="26e6niho3a762go3ln4sfoo9st">&nbsp;&nbsp;&nbsp;@OnError</a>
+</h3>
+<h3 class="topic">
+<a name="7bo18qaj6grjlqqg2fgpk3gipi">&nbsp;&nbsp;&nbsp;@OnMessage</a>
+</h3>
+<h3 class="topic">
+<a name="1b8d9pdfqvhoft2nfl916q5p3l">&nbsp;&nbsp;聊天室 设计</a>
+</h3>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/%E8%81%8A%E5%A4%A9%E5%AE%A4 %E8%AE%BE%E8%AE%A1.jpg"></div>
+<h3 class="topic">
+<a name="4bthq4j8tq1c460mm41pg9ft5f">&nbsp;&nbsp;&nbsp;原理</a>
+</h3>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/%E5%8E%9F%E7%90%86.jpg"></div>
+<h3 class="topic">
+<a name="0enudn2ujr93llpdpvj3i234jr">&nbsp;&nbsp;&nbsp;&nbsp;创建一个类，使用@ServerPoint注解修饰，代表一个WebSocket连接</a>
+</h3>
+<h3 class="topic">
+<a name="7u77foimn4lm9kc08tm9dpsmff">&nbsp;&nbsp;&nbsp;&nbsp;是一个多例的，一个连接对应一个@ServerPoint实例对象</a>
+</h3>
+<h3 class="topic">
+<a name="7dg6k1d64009ibuo8ruhf1cfo7">&nbsp;&nbsp;&nbsp;&nbsp;当连接创建的时候 ，每个实例 保存自己的 私有的 Session对象</a>
+</h3>
+<h3 class="topic">
+<a name="7mgh6kbgtdnkan69sgm2mf9an3">&nbsp;&nbsp;&nbsp;&nbsp;创建一个 共享的 CopyOnWriteSet 存储所有的 连接&#13;
+用于在多个连接间 做交互</a>
+</h3>
+<h3 class="topic">
+<a name="28ju1uvl1vap934q2pba26d9f0">&nbsp;&nbsp;&nbsp;&nbsp;创建一个 共享的 ConcurrentHashMap 将客户端的名称 与 连接 一一对应 存储起来 实现登录功能</a>
+</h3>
+<h3 class="topic">
+<a name="74gesg78tkb9qlu8amtorfshfv">&nbsp;&nbsp;&nbsp;OnOpen</a>
+</h3>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/OnOpen.jpg"></div>
+<h3 class="topic">
+<a name="55dkget6ta2gnoquklinrmlogg">&nbsp;&nbsp;&nbsp;&nbsp;1、当 一个连接 建立的时候 即触发OnOpen处理器的时候，将连接存储在 CopyOnWriteSet 中。&#13;
+2、并存储当前的Session对象</a>
+</h3>
+<h3 class="topic">
+<a name="41rgk49ccec06mc3j5kjqljk0f">&nbsp;&nbsp;&nbsp;OnMessage</a>
+</h3>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/OnMessage.jpg"></div>
+<h3 class="topic">
+<a name="0dcerpb4dlfnmsunc0balt8evi">&nbsp;&nbsp;&nbsp;&nbsp;处理逻辑</a>
+</h3>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/%E5%A4%84%E7%90%86%E9%80%BB%E8%BE%91.jpg"></div>
+<h3 class="topic">
+<a name="2692d9g6ik592kjk91p1qr1l3p">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登录逻辑</a>
+</h3>
+<h3 class="topic">
+<a name="4d048po30bkbv9lr6n1hje6aik">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发送消息逻辑</a>
+</h3>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E9%80%BB%E8%BE%91.jpg"></div>
+<h3 class="topic">
+<a name="7jp314u07q9gsqn607npct5el4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一对一发</a>
+</h3>
+<h3 class="topic">
+<a name="5nqe8un64db2tr79penp3eo9ro">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一对多发</a>
+</h3>
+<h3 class="topic">
+<a name="0ctm6f1tjsab79bts7l7b2cdf9">&nbsp;&nbsp;&nbsp;&nbsp;登录</a>
+</h3>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/%E7%99%BB%E5%BD%95.jpg"></div>
+<h3 class="topic">
+<a name="0uf4clesdae7iofln4b8s31s00">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;获取 用户名 与 连接对象 存储到 ConcurrentHashMap中</a>
+</h3>
+<h3 class="topic">
+<a name="2n4i69f1mrnvvf73d5u8qmkvdt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发送广播，通知所有用户 新用户 加入聊天室</a>
+</h3>
+<h3 class="topic">
+<a name="6to83a233s2aea2dvlce0g4g5b">&nbsp;&nbsp;&nbsp;&nbsp;发送消息</a>
+</h3>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF.jpg"></div>
+<h3 class="topic">
+<a name="2v4jb5lav0tta1ag8bd1abpuhb">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、获取Message类型</a>
+</h3>
+<h3 class="topic">
+<a name="0hs3p8t3lsc7p3agbn0osjueuc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、根据不同类型 调用不同的处理逻辑</a>
+</h3>
+<h3 class="topic">
+<a name="7kbjq38ltuhh42u152n8jfuamq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3、如何发送消息</a>
+</h3>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/3%E3%80%81%E5%A6%82%E4%BD%95%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF.jpg"></div>
+<h3 class="topic">
+<a name="2qjbqq6ks8u199jsforf5h3vgu">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据名称获取存储在 ConcurrentHashMap中 需要发送消息的连接，再获取到其存储的Session 实现一对一发送消息</a>
+</h3>
+<h3 class="topic">
+<a name="59fjfpnrjnmajdic77tkn8bq86">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;遍历 CopyOnArraySet 获取所有连接 实现 群发功能</a>
+</h3>
+<h3 class="topic">
+<a name="2uka2c6qfgh3uscboi45rgm430">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注意事项</a>
+</h3>
+<p class="labelsAndMarkers">
+<img class="marker" src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/priority_1.png"></p>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.jpg"></div>
+<h3 class="topic">
+<a name="27tgvmu4it9gsdneujn78ojcsi">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发送消息的时候可能出现 多个人 同时向一个人 发送消息、或 多个人 同时广播</a>
+</h3>
+<h3 class="topic">
+<a name="4iu0j4rdei7nnj2c7itrght5o3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;连接 对象 是非线程安全的 需要 使用 同步代码块 保证其线程安全，这也是 瓶颈所在</a>
+</h3>
+<h2 class="topic">
+<a name="203guokhm09d09lbvjtkvmqish">客户端发起建立连接请求</a>
+</h2>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%8F%91%E8%B5%B7%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%E8%AF%B7%E6%B1%82.jpg"></div>
+<p class="relationships">参见: <a href="#04esp5gcr87mir17h3r8k81nro">服务端响应该请求 (握手)</a>, <a href="#17dh7ddvclel9v0rd8d3hievt9">本质是一个TCP连接</a>
+</p>
+<h3 class="topic">
+<a name="21cimr2sdg1kf8bcghs3t8orgf">&nbsp;包含特殊的头信息 Upgrade: WebSocket</a>
+</h3>
+<h3 class="topic">
+<a name="7r0ai8obko0egul3mpc1v1ukdn">&nbsp;告诉服务器 我要建立一个 WebSocket的连接</a>
+</h3>
+<h2 class="topic">
+<a name="04esp5gcr87mir17h3r8k81nro">服务端响应该请求</a>
+</h2>
+<div class="overview">
+<img src="%E5%9F%BA%E4%BA%8EWebSocket%E7%9A%84 %E5%B0%8F%E5%9E%8B %E7%BD%91%E9%A1%B5%E8%81%8A%E5%A4%A9%E5%AE%A4_files/images/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%93%8D%E5%BA%94%E8%AF%A5%E8%AF%B7%E6%B1%82.jpg"></div>
+<p class="relationships">参见: <a href="#203guokhm09d09lbvjtkvmqish">客户端发起建立连接请求 (握手)</a>, <a href="#0he5do5j0qbd08b1e1lc09rghm">客户端持有服务器返回的16位安全密钥 (握手成功)</a>
+</p>
+<h3 class="topic">
+<a name="1e5andlam1clel7q7bdceul508">&nbsp;响应头 Connection:upgrade&#13;
+           Upgrade:websocket</a>
+</h3>
+<h3 class="topic">
+<a name="630ii7u962er5c2bbqu1bqe6gk">&nbsp;Web服务器 是一个实现了 WebSocket 规范的WebSocket</a>
+</h3>
+<h2 class="topic">
+<a name="0he5do5j0qbd08b1e1lc09rghm">客户端持有服务器返回的16位安全密钥</a>
+</h2>
+<p class="relationships">参见: <a href="#04esp5gcr87mir17h3r8k81nro">服务端响应该请求 (握手成功)</a>
+</p>
+</body>
+</html>
